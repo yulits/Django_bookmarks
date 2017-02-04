@@ -31,11 +31,11 @@
 		<div class="image-likes">
 			{% for user in image.users_like.all %}
 				<div id="{{ user.username }}">
-					<img src="{{ user.profile.photo.url }}">
+					<img src="{{ user.profile.avatar.url }}">
 					<p>{{ user.first_name }}</p>
 				</div>
 				{% empty %}
-				Nobody likes this image yet.
+				<p id='no-likes'>Nobody likes this image yet.</p>
 			{% endfor %}
 		</div>
 	{% endwith %}
@@ -61,11 +61,15 @@
 					$('span.count .total').text(previous_action == 'like' ?	previous_likes + 1 : previous_likes - 1);
 					if (previous_action == 'unlike') {
 						$("#{{ request.user.username }}").remove()
+						if ($("div.image-likes").children().length == 0) {
+							$('div.image-likes').append('<p id="no-likes">Nobody likes this image yet.<p>')
+						}					
 					}	
 					else {
-						$('div.image-likes').prepend('<div id="{{ request.user.username }}"></div>')
-						$('#{{ request.user.username }}').append('<img src="{{ request.user.profile.photo.url }}">')
+						$('div.image-likes').append('<div id="{{ request.user.username }}"></div>')
+						$('#{{ request.user.username }}').append('<img src="{{ request.user.profile.avatar.url }}">')
 						$('#{{ request.user.username }}').append('<p>{{ request.user.first_name }}</p>')
+						$("p#no-likes").remove()
 					}
 				}
 			}

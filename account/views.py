@@ -7,6 +7,9 @@ from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 
+from sorl.thumbnail import get_thumbnail
+from bookmarks import settings
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -42,7 +45,6 @@ def register(request):
             new_user.save()
             # Create the user profile
             profile = Profile.objects.create(user=new_user)
-           # profile.photo.url = 
             return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
@@ -55,7 +57,17 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            profile = profile_form.save()
+            a = get_thumbnail(profile.photo, '120x120', crop='center', quality=99)
+            media_url_len = len(settings.MEDIA_URL)
+            photo = profile.photo.url
+            avatar_url = photo[:photo.rfind('.')] + '_avatar.jpg'
+            avatar_fname = settings.BASE_DIR +  avatar_url
+            file = open(avatar_fname,'wb')
+            file.write(a.read())
+            file.close
+            profile.avatar = avatar_url[media_url_len:]
+            profile.save()
             messages.success(request, 'Profile updated successfully')
         else:
             messages.error(request, 'Error updating your profile')
