@@ -23,4 +23,7 @@ class Image(models.Model):
             super(Image, self).save(*args, **kwargs)
             
     def get_absolute_url(self):
+        f = open('log.txt', 'w')
+        f.write(reverse('images:detail', args=[self.id, self.slug]))
+        f.close()
         return reverse('images:detail', args=[self.id, self.slug])
