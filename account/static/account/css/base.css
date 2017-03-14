@@ -1,9 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Muli);
 
 body {
-    margin:0;
-    padding:0;
-    font-family:helvetica, sans-serif;
+    margin: auto;
+    padding: 0;
+    width: 80%;
+    
+    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Raleway', sans-serif;*/
 }
 
 p {
@@ -11,8 +14,8 @@ p {
 }
 
 a {
-    color:#12c064;
-    text-decoration:none;
+    color: #12c064;
+    text-decoration: none;
 }
 
 a:hover {
@@ -22,13 +25,13 @@ a:hover {
 h1, h2, h3, h4, h5 , h6 { font-family: 'Muli', sans-serif; font-weight:normal; }
 
 h1 {
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
-    margin:10px 0 20px 0;
+    border-bottom: 1px solid #bbb;
+    padding: 0 0 10px 0;
+    margin: 10px 0 20px 0;
 }
 
 h2 {
-    margin:30px 0 20px;
+    margin: 30px 0 20px;
 }
 
 ol {
@@ -37,6 +40,7 @@ ol {
 
 #header {
     padding:10px 100px;
+    margin-bottom: 20px;
     font-size:14px;
     background:#12c064;
     color:#fff;
@@ -82,7 +86,23 @@ ol {
 }
 
 #content {
-    padding:30px 100px;
+    padding: 30px 20px 30px 70px;
+    width: 70%;
+    float: left;
+    margin: auto;
+    border-right: 1px solid #bbb;
+}
+
+#sidebar {
+	width: 15%;
+	float: right;
+	margin: auto;
+
+}
+
+#sidebar ul {
+	list-style-type: none;
+	padding: 10px 0px 30px 0px;
 }
 
 /* forms */
@@ -173,6 +193,13 @@ ul.messages li a.close {
     float:left;
 }
 
+.welcome {
+	float: left;
+	width: 65%
+}
+
+
+
 /* social-auth */
 .social {
     float:right;
@@ -209,8 +236,8 @@ ul.messages li a.close {
     color:#aaa;
     border:3px solid #bbb;
     border-radius:26px;
-    padding:10px 20px;
-    margin:20px 10px 0;
+    padding: 10px 20px;
+    margin: 40px 20px 0px 0px;
 }
 a.like, a.follow { float:right; margin-top:-8px; }
 
@@ -239,6 +266,10 @@ a.like, a.follow { float:right; margin-top:-8px; }
   	box-shadow: 0 0 7px #666;
 }
 
+.item-img {
+	border-radius: 100%;
+}
+
 /* users */
 #people-list img {
     width:180px;
@@ -253,6 +284,7 @@ a.like, a.follow { float:right; margin-top:-8px; }
     padding:10px;
 }
 #people-list .info { text-align:center; }
+
 img.user-detail {
     border-radius:50%;
     float:left;
@@ -264,10 +296,21 @@ img.user-detail {
 }
 .image-container { margin-top:40px; }
 
+.follow-group {
+	float:left;
+	margin: 50px 0 0 15px;
+}
 /* actions */
+#action-list {
+    clear: both;
+	padding-top: 20px;
+}
+
 .action {
-    clear:both;
-    overflow:auto;
+    clear: both;
+    overflow: auto;
+    border-bottom: 1px solid #bbb;
+	padding: 20px 0px 20px 0px;
 }
 .action .images {
     float:left;
@@ -276,4 +319,33 @@ img.user-detail {
 .action .date {
     font-style:italic;
     color:#ccc;
+}
+
+.action .target {
+	clear:both;
+    overflow:auto;
+	
+}
+
+.action .target img {
+	width = 300px;
+	
+}
+.cbb:hover {
+    background-image: url(https://tpc.googlesyndication.com/pagead/images/x_button_dark.svg);
+    cursor: pointer;
+}
+
+.cbb {
+    float: right;
+}
+
+.cbb {
+    background-image: url(https://tpc.googlesyndication.com/pagead/images/x_button_blue2.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    z-index: 9020;
 }

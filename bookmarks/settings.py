@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/`
 import os
 
 from django.core.urlresolvers import reverse_lazy
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_URL = reverse_lazy('logout')
+LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
+LOGIN_URL = reverse_lazy('account:login')
+LOGOUT_URL = reverse_lazy('account:logout')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['.mysite.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'actions',
     'account',
     'images',
     'sorl.thumbnail',
@@ -151,3 +152,7 @@ SOCIAL_AUTH_TWITTER_SECRET = '7n7LEs4TWfQbZQF7wBZAge7cLxVitR1v2p1ikiSOQ5WBcCGtm0
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '342219530404-ojc1mr8mfbn9t1jivdbunqckejkr0hs2.apps.googleusercontent.com' # Google Consumer Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'en_RyCbafVPHuOzVXH-b56jl' # Google Consumer Secret
+
+ABSOLUTE_URL_OVERRIDES = {
+                        'auth.user': lambda u: reverse_lazy('account:user_detail', args=[u.username])
+}

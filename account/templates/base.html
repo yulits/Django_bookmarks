@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>{% block title %}{% endblock %}</title>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans|Poppins|Raleway" rel="stylesheet">
 		<link href="{% static "account/css/base.css" %}" rel="stylesheet">
 		<script type="text/javascript"  src="{% static "js/jquery-3.1.1.js" %}"></script>
 		<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
@@ -13,26 +14,26 @@
 			{% if request.user.is_authenticated %}
 				<ul class="menu">
 					<li {% if section == "dashboard" %}class="selected"{% endif %}>
-						<a href="{% url "dashboard" %}">My dashboard</a>
+						<a href="{% url "account:dashboard" %}">My dashboard</a>
 					</li>
 					<li {% if section == "images" %}class="selected"{% endif %}>
 						<a href="{% url "images:list" %}">Images</a>
 					</li>
 					<li {% if section == "people" %}class="selected"{% endif %}>
-						<a href="#">People</a>
+						<a href="{% url "account:user_list" %}">People</a>
 					</li>
 				</ul>
 			{% endif %}
 			<span class="user">
 				{% if request.user.is_authenticated %}
 					Hello {{ request.user.first_name }},
-					<a href="{% url "logout" %}">Logout</a>
+					<a href="{% url "account:logout" %}">Logout</a>
 				{% else %}
-					<a href="{% url "login" %}">Log-in</a>
+					<a href="{% url "account:login" %}">Log-in</a>
 				{% endif %}
 			</span>
 		</div>
-		
+		<!-- 
 		{% if messages %}
 			<ul class="messages">
 				{% for message in messages %}
@@ -41,10 +42,20 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
-
+		 -->
 		<div id="content">
 			{% block content %}
 			{% endblock %}
+		</div>
+		
+		<div id="sidebar">
+			
+			<ul>
+				<li><h2>My action</h2></li>
+				<li><a href="{% url "images:user_image_list" request.user.username %}">My pictures</a></li>
+				<li><a href="{% url "images:images_liked" request.user.username %}">I like</a></li>
+				<li><a href="{% url "account:following" request.user.username %}">I follow</a></li>
+			</ul>
 		</div>
 		
 		<script>

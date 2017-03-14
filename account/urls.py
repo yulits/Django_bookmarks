@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # post views
-    url(r'^loginn/$', views.user_login, name='loginn'),
+    #url(r'^login/$', views.user_login, name='login'),
     # login / logout urls
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
@@ -21,4 +21,11 @@ urlpatterns = [
     url(r'^password-reset/complete/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^register/$', views.register, name='register'),
     url(r'^edit/$', views.edit, name='edit'),
+    url(r'^users/$', views.user_list, name='user_list'),
+    url(r'^users/follow/$', views.user_follow, name='user_follow'),
+    url(r'^users/(?P<username>[-\w]+)/$', views.user_detail, name='user_detail'),
+    url(r'^users/(?P<username>[-\w]+)/followers/$', views.user_followers, name='followers'),
+    url(r'^users/(?P<username>[-\w]+)/following/$', views.user_following, name='following'),
+    
+    
 ]

@@ -27,7 +27,7 @@
 						});
 			jQuery('#bookmarklet .images a').click(function(e){
 				selected_image = jQuery(this).children('img').attr('src');
-				jQuery('#bookmarklet').hide();
+				//jQuery('#bookmarklet').hide();
 				window.open(site_url +'images/create/?url=' + encodeURIComponent(selected_image)
 															+ '&title='
 															+ encodeURIComponent(jQuery('title').text()), '_blank');
@@ -51,7 +51,9 @@
 						alert('An error ocurred while loading jQuery')
 					}
 				} else {
-					bookmarklet();
+					if (!(jQuery('#bookmarklet').length)) {
+						bookmarklet();
+					}
 				}
 			})();
 		}

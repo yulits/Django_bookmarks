@@ -31,8 +31,12 @@
 		<div class="image-likes">
 			{% for user in image.users_like.all %}
 				<div id="{{ user.username }}">
-					<img src="{{ user.profile.avatar.url }}">
-					<p>{{ user.first_name }}</p>
+					<a href = "{{user.get_absolute_url  }}">
+						<img src="{{ user.profile.avatar.url }}">
+					</a>
+					<a href = "{{user.get_absolute_url  }}">
+						<p>{{ user.first_name }}</p>
+					</a>
 				</div>
 				{% empty %}
 				<p id='no-likes'>Nobody likes this image yet.</p>
@@ -67,8 +71,10 @@
 					}	
 					else {
 						$('div.image-likes').append('<div id="{{ request.user.username }}"></div>')
-						$('#{{ request.user.username }}').append('<img src="{{ request.user.profile.avatar.url }}">')
-						$('#{{ request.user.username }}').append('<p>{{ request.user.first_name }}</p>')
+						$('#{{ request.user.username }}').append('<a href = "{{user.get_absolute_url  }}">\
+																<img src="{{ request.user.profile.avatar.url }}"></a>')
+						$('#{{ request.user.username }}').append('<a href = "{{user.get_absolute_url  }}">\
+																<p>{{ request.user.first_name }}</p></a>')
 						$("p#no-likes").remove()
 					}
 				}
